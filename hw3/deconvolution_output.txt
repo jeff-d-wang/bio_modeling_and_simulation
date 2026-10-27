@@ -1,0 +1,17 @@
+Cell types: monocyte, B cell, CD4 T, CD8 T, NK, neutrophil
+
+Sample A
+least squares                  c = [ 0.366  0.181  0.31   0.086 -0.064  0.011]  sum = 0.890
+                               largest |residuals|: g01 -2.49, g48 -1.88, g06 1.73, g16 1.72, g35 -1.61, g13 1.61
+penalized fit, lambda = 10     c = [ 0.357  0.173  0.3    0.083 -0.012  0.001]  sum = 0.901
+                               largest |residuals|: g01 -2.55, g48 -2.01, g16 1.76, g06 1.69, g39 -1.62, g50 1.60
+penalized fit, lambda = 30     c = [0.35  0.166 0.299 0.075 0.    0.   ]  sum = 0.891
+                               largest |residuals|: g01 -2.60, g48 -2.06, g16 1.74, g39 -1.64, g06 1.64, g47 -1.61
+penalized fit, lambda = 100    c = [0.335 0.145 0.31  0.049 0.    0.   ]  sum = 0.839
+                               largest |residuals|: g01 -2.76, g48 -2.20, g46 -1.75, g47 -1.73, g39 -1.70, g26 -1.64
+
+Sample B
+least squares                  c = [ 0.176  0.415  0.659 -0.084 -0.104  0.002]  sum = 1.064
+                               largest |residuals|: g20 -27.16, g12 -7.27, g19 3.89, g08 3.88, g42 -3.36, g04 -3.19
+absolute-error fit, lambda = 0 c = [0.124 0.265 0.309 0.168 0.179 0.083]  sum = 1.127
+                               largest |residuals|: g20 -29.59, g12 -9.13, g04 -3.52, g46 -3.07, g05 -2.35, g42 -2.19

@@ -1,0 +1,58 @@
+Problem Set 3 starting files
+
+Keep PS3-starter and PS3-data side by side and run the commands below from the folder that
+contains both.
+
+PS3-student.pdf is the handout. Its standalone LaTeX source is PS3-student.tex;
+compile it from the same folder with:
+    pdflatex PS3-student.tex
+
+Installation (Problems 1, 5, and 6)
+
+    python -m pip install numpy matplotlib cmdstanpy cvxpy
+    python -c "import cmdstanpy; cmdstanpy.install_cmdstan()"
+
+CmdStan needs a C++ compiler. If installation fails, follow
+https://mc-stan.org/cmdstanpy/installation.html for your operating system, and if that does
+not work, send the error message to course staff.
+
+Problem 1
+
+Complete the P1b blocks in simulate_growth.py, then:
+    python PS3-starter/simulate_growth.py --output simulated_growth.json
+    python PS3-starter/simulate_growth.py --sigma 0 --output noiseless.json
+    python PS3-starter/simulate_growth.py --repeats 1000 --output many_readings.json
+    python PS3-starter/simulate_growth.py --from-prior --seed 1 --output prior1.json
+Repeat the last command with --seed 2 through 5, changing the output to prior2.json through
+prior5.json.
+    python PS3-starter/fit_growth.py PS3-starter/growth_base.stan simulated_growth.json --output base_fit
+
+After editing the P1d blocks in growth_extend.stan:
+    python PS3-starter/fit_growth.py PS3-starter/growth_extend.stan PS3-data/growth.json --output extended_fit
+
+In Stan, a vector of M values is declared with the line
+    vector[M] a;
+and its entries are a[1] through a[M].
+An integer array can index a vector, so a[cell_line[n]] is the entry for reading n's cell line.
+Keep the parameter names a, logr, t0, and sigma, and use mu_a, mu_logr, tau_a, and tau_logr for
+the population parameters, so that the fitting script can set starting values. Each output folder
+has summary.csv (posterior mean, standard deviation, and 5th and 95th percentiles of every
+parameter, with rows such as exp(a[12]) for plateaus) and draws.npz (every posterior draw).
+fit_growth.py compiles each Stan program into an executable file next to it; do not submit
+those executables. Occasional rejected proposals during warm-up, the early part of sampling,
+can produce messages such as "Location parameter is -inf". If warnings persist or occur after
+warm-up, or Stan reports divergent transitions, send the messages to course staff.
+
+Problem 4
+
+Write your own program and test it on PS3-data/frap_a.txt, frap_b.txt, and frap_c.txt.
+
+Problem 5
+
+Complete the P5d block in sequencing.py, then:
+    python PS3-starter/sequencing.py
+
+Problem 6
+
+Complete the three P6d blocks in deconvolution.py, then:
+    python PS3-starter/deconvolution.py PS3-data/deconvolution.json
